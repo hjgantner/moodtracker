@@ -3,7 +3,6 @@ import '../css/MoodTracker.css';
 
 
 function Emotion ({ emotion, changeMood }) {
-    console.log(emotion);
     return (
         <button
             id={emotion.name}
