@@ -1,0 +1,21 @@
+.btn-happy {
+    background-color: green;
+    color: white;
+}
+
+.btn-disgusted {
+  background-color: rgb(123, 173, 28);
+  color: white;
+}
+.btn-sad {
+  background-color: rgb(2, 0, 128);
+  color: white;
+}
+.btn-bad {
+  background-color: rgb(12, 12, 12);
+  color: white;
+}
+.btn-surprised {
+  background-color: rgb(255, 0, 200);
+  color: white;
+}

@@ -1,11 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
-import MoodTracker from './MoodTracker';
+import MoodTracker from './components/MoodTracker';
+import NavBar from './components/NavBar';
 
 function App() {
   return (
     <div className="App">
-      <MoodTracker/>
+      <NavBar/>
+      <div className="container-fluid">
+        <MoodTracker/>
+      </div>
     </div>
   );
 }
