@@ -54,27 +54,57 @@ class App extends Component {
         username: "",
         mood: "",
         notes: "",
-        inserted: ""
+        insertedAt: ""
     };
 
     this.changeMood = this.changeMood.bind(this);
+    this.setUsername = this.setUsername.bind(this);
+    this.submitEmotion = this.submitEmotion.bind(this);
+
   }
 
 
   changeMood (emotion) {
-
     this.setState({mood: emotion});
+    return;
+  }
+
+  setUsername (username) {
+    this.setState({username: username}, () => {
+      //this callback function ensures state is updated before
+      // printing it to the console
+      console.log(this.state);
+    });
+    return;
+  }
+
+  //after emotion, username, and possibly notes are set, 
+  // store that information along with a date stamp.
+  submitEmotion (notes) {
+    console.log(notes);
+    if(notes !== null) {
+      this.setState({notes: notes});
+    }
+    var insertStamp = new Date();
+    this.setState({insertedAt: insertStamp}, () => {
+      console.log(this.state);
+    });
     return;
   }
   
   render() {
     return (
       <div className="App">
-        <NavBar/>
+        <NavBar
+          setUsername={this.setUsername}
+        />
         <div className="container-fluid">
           <MoodTracker
             moods={emotions}
+            username={this.state.username}
+            notes={this.state.notes}
             changeMood={this.changeMood}
+            submitEmotions={this.submitEmotion}
             mood={this.state.mood}
           />
         </div>
