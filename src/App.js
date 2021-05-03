@@ -1,5 +1,6 @@
 import MoodTracker from './components/MoodTracker';
 import NavBar from './components/NavBar';
+import Timeline from './components/Timeline';
 import { React, Component } from 'react';
 
 
@@ -54,7 +55,9 @@ class App extends Component {
         username: "",
         mood: "",
         notes: "",
-        insertedAt: ""
+        insertedAt: "",
+        showTimeline: false,
+        history: []
     };
 
     this.changeMood = this.changeMood.bind(this);
@@ -73,7 +76,6 @@ class App extends Component {
     this.setState({username: username}, () => {
       //this callback function ensures state is updated before
       // printing it to the console
-      console.log(this.state);
     });
     return;
   }
@@ -82,17 +84,42 @@ class App extends Component {
   // store that information along with a date stamp.
   submitEmotion (notes) {
     console.log(notes);
-    if(notes !== null) {
+    if(notes) {
       this.setState({notes: notes});
     }
     var insertStamp = new Date();
-    this.setState({insertedAt: insertStamp}, () => {
-      console.log(this.state);
+    this.setState({insertedAt: insertStamp}, async () => {
+      const response = await fetch(`http://localhost:8080/${this.state.username}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(this.state),
+      });
+      //const userHistory = await response.json();
+      this.setState({showTimeline : true});
+      await this.getHistory();
     });
     return;
   }
+
+  async getHistory () {
+    var response = await fetch(`http://localhost:8080/${this.state.username}`);
+    const userHistory = await response.json();
+    console.log(userHistory);
+    this.setState({history : userHistory});
+  }
   
   render() {
+    const showHistory = this.state.showTimeline;
+    let display;
+    if(showHistory) {
+      var historyToDisplay = this.state.history;
+      console.log("calling timeline: ", historyToDisplay);
+      display = <Timeline history={historyToDisplay}/>
+    } else {
+      display = "No history";
+    }
     return (
       <div className="App">
         <NavBar
@@ -107,6 +134,9 @@ class App extends Component {
             submitEmotions={this.submitEmotion}
             mood={this.state.mood}
           />
+        </div>
+        <div>
+          {display}
         </div>
       </div>
     );

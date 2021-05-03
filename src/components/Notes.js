@@ -8,6 +8,12 @@ function Notes ({submitEmotions}) {
         setNotes(e);
     }
 
+    const handleSubmit = (notes,e) => {
+        e.preventDefault();
+        console.log(e);
+        submitEmotions(notes);
+    }
+
     return (
         <form>
             <label>
@@ -15,7 +21,7 @@ function Notes ({submitEmotions}) {
                 <br/>
                 <textarea id="notesOnFeeling" onChange={e => handleChange(e.target.value)}/>
                 <br/>
-                <input type="submit" value="Submit" onClick={e => submitEmotions(notes)} />
+                <button onClick={e => handleSubmit(notes, e)}>Submit</button>
             </label>
         </form>
     );
