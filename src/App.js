@@ -73,6 +73,12 @@ class App extends Component {
 
   }
 
+  componentDidUpdate() {
+    if(this.state.username) {
+      
+    }
+  }
+
 
   changeMood (emotion, color) {
     this.setState({
@@ -83,10 +89,17 @@ class App extends Component {
   }
 
   setUsername (username) {
-    this.setState({username: username}, () => {
-      //this callback function ensures state is updated before
-      // printing it to the console
+    this.setState({
+      username: username,
+      mood: ""
+    }, () => {
+      this.getHistory().then( result => {
+        if(result) {
+          this.setState({history : result});
+        }
+      });
     });
+
     return;
   }
 
@@ -116,36 +129,32 @@ class App extends Component {
   async getHistory () {
     var response = await fetch(`http://localhost:8080/${this.state.username}`);
     const userHistory = await response.json();
-    console.log(userHistory);
-    this.setState({history : userHistory});
+    return userHistory;
   }
   
   render() {
-    const showHistory = this.state.showTimeline;
-    let display;
-    if(showHistory) {
-      var historyToDisplay = this.state.history;
-      console.log("calling timeline: ", historyToDisplay);
-      display = <Timeline history={historyToDisplay}/>
-    } else {
-      display = "No history";
-    }
+
     return (
       <div className="App">
         <NavBar
           setUsername={this.setUsername}
         />
-        <div className="container-fluid">
-          <MoodTracker
-            moods={emotions}
-            username={this.state.username}
-            notes={this.state.notes}
-            changeMood={this.changeMood}
-            submitEmotions={this.submitEmotion}
-            mood={this.state.mood}
-          />
-          {display}
-        </div>
+        {
+          this.state.username ?
+          (<div className="container-fluid">
+            <MoodTracker
+              moods={emotions}
+              username={this.state.username}
+              notes={this.state.notes}
+              changeMood={this.changeMood}
+              submitEmotions={this.submitEmotion}
+              mood={this.state.mood}
+            />
+            <Timeline history={this.state.history}/>
+          </div>)
+          :
+          ""
+          }
       </div>
     );
   }

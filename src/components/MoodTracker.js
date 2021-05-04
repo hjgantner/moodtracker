@@ -30,11 +30,20 @@ class MoodTracker extends Component {
                         : null }
                 </div>
                 <br/>
-                <div>
-                    <Notes
-                        submitEmotions={this.props.submitEmotions}
-                    />
-                </div>
+                {
+                     <div>
+                     {
+                        this.props.mood ? 
+                    
+                            <Notes
+                                submitEmotions={this.props.submitEmotions}
+                            />
+                    
+                        :
+                        ""
+                     }
+                    </div>
+                }
             </div>
 
 

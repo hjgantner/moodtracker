@@ -14,23 +14,8 @@ export default function Timeline ({history}) {
                 {
                     history.map( element => 
 
-                            <li 
-                                className="list-inline-item"
-                                style={{backgroundColor: element.color}}
-                            >
-                                <OverlayTrigger 
-                                    placement="top"
-                                    overlay={<Tooltip id="button-tooltip-2">{(element.notes && element.insertedAt) ? 
-                                        "At: " + element.insertedAt + "\n" + element.notes : element.mood}</Tooltip>}
-                                >
-                                    <button 
-                                        type="button" 
-                                        className="btn btn-lg" 
-                                    >
-                                    
 
-                                    </button>
-                                </OverlayTrigger>
+
                                 
                             </li>                        
                     )
