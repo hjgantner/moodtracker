@@ -6,22 +6,28 @@ import { React, Component } from 'react';
 
 const emotions = [
   {
-      name: "happy"
+      name: "happy",
+      color: "#008000"
   },
   {
-      name: "bad"
+      name: "bad",
+      color: "#0c0c0c"
   },
   {
-      name: "angry"
+      name: "angry",
+      color: "#fa0000"
   },
   {
-      name: "disgusted"
+      name: "disgusted",
+      color: "#7bad1c"
   },
   {
-      name: "sad"
+      name: "sad",
+      color: "#020080"
   },
   {
-      name: "surprised"
+      name: "surprised",
+      color: "#ff00c8"
   },
 ]
 
@@ -54,6 +60,7 @@ class App extends Component {
     this.state = {
         username: "",
         mood: "",
+        color: "",
         notes: "",
         insertedAt: "",
         showTimeline: false,
@@ -67,8 +74,11 @@ class App extends Component {
   }
 
 
-  changeMood (emotion) {
-    this.setState({mood: emotion});
+  changeMood (emotion, color) {
+    this.setState({
+      mood: emotion,
+      color: color
+    });
     return;
   }
 
@@ -134,8 +144,6 @@ class App extends Component {
             submitEmotions={this.submitEmotion}
             mood={this.state.mood}
           />
-        </div>
-        <div>
           {display}
         </div>
       </div>
