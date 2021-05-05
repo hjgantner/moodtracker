@@ -6,28 +6,36 @@ import { React, Component } from 'react';
 
 const emotions = [
   {
-      name: "happy",
-      color: "#008000"
+    name: "angry",
+    color: "#B81236"
   },
   {
-      name: "bad",
-      color: "#0c0c0c"
+      name: "anxious",
+      color: "#E82253"
   },
   {
-      name: "angry",
-      color: "#fa0000"
-  },
-  {
-      name: "disgusted",
-      color: "#7bad1c"
+      name: "worried",
+      color: "#AE2166"
   },
   {
       name: "sad",
-      color: "#020080"
+      color: "#441E57"
   },
   {
-      name: "surprised",
-      color: "#ff00c8"
+      name: "melancholic",
+      color: "#004185"
+  },
+  {
+      name: "content",
+      color: "#037E9F"
+  },
+  {
+    name: "happy",
+    color: "#269261"
+  },
+  {
+    name: "elated",
+    color: "#FEC81E"
   },
 ]
 
@@ -58,6 +66,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+        id: "",
         username: "",
         mood: "",
         color: "",
@@ -119,9 +128,12 @@ class App extends Component {
         },
         body: JSON.stringify(this.state),
       });
-      //const userHistory = await response.json();
-      this.setState({showTimeline : true});
-      await this.getHistory();
+      const newInsert = await response.json();
+      // this.setState({showTimeline : true});
+      // if(!this.state.history) {
+      console.log("response: ", newInsert);
+      var updatedHistory = this.state.history.concat(newInsert);
+      this.setState({ history : updatedHistory });
     });
     return;
   }

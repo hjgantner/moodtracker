@@ -4,7 +4,7 @@ function Emotion ({ emotion, changeMood }) {
     return (
         <button
             id={emotion.name}
-            className={'btn-' + (emotion.name)}
+            style={{backgroundColor: emotion.color}}
             onClick={e => changeMood(emotion.name, emotion.color)}
         >
             {emotion.name}
