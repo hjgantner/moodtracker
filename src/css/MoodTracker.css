@@ -1,21 +1,15 @@
-.btn-happy {
-    background-color: green;
-    color: white;
+.btn-circle {
+  width: 75px;
+  height: 75px;
+  /* padding: 10px 16px; */
+  border-radius: 45px;
+  font-size: 12px;
+  text-align: center;
+  margin-right: 15px;
+  border: none;
+  transition-duration: 0.4s;
 }
 
-.btn-disgusted {
-  background-color: rgb(123, 173, 28);
-  color: white;
-}
-.btn-sad {
-  background-color: rgb(2, 0, 128);
-  color: white;
-}
-.btn-bad {
-  background-color: rgb(12, 12, 12);
-  color: white;
-}
-.btn-surprised {
-  background-color: rgb(255, 0, 200);
-  color: white;
+.btn-circle:hover {
+  background-color: antiquewhite
 }

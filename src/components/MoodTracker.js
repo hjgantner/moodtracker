@@ -2,13 +2,23 @@ import React, { Component } from 'react';
 import Emotion from  './Emotion';
 import Notes from  './Notes';
 import '../css/MoodTracker.css';
-
+import { CirclePicker } from 'react-color';
 
 
 class MoodTracker extends Component {
 
 
+    handleChangeComplete = (color) => {
+
+        this.setState({background : color.hex})
+    };
+
+    handleChange(color, event) {
+        console.log("color: ", color);
+        console.log("event: ", event);
+    }
     render() {
+
         return (
             <div className="jumbotron">
                 {this.props.username !== "" ? 
@@ -17,12 +27,15 @@ class MoodTracker extends Component {
                 }
 
                 <div>
+                    
+
                     {this.props.moods.map(mood => (
                         <Emotion 
                             emotion={mood}
                             changeMood={this.props.changeMood}
                         />
                     ))}
+                   
                 </div>
                 <div>
                     {this.props.mood !== "" ? 
@@ -38,15 +51,12 @@ class MoodTracker extends Component {
                             <Notes
                                 submitEmotions={this.props.submitEmotions}
                             />
-                    
                         :
                         ""
                      }
                     </div>
                 }
             </div>
-
-
         );
     }
 

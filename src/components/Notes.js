@@ -15,15 +15,17 @@ function Notes ({submitEmotions}) {
     }
 
     return (
-        <form>
-            <label>
-                Want to go deeper?
-                <br/>
-                <textarea id="notesOnFeeling" onChange={e => handleChange(e.target.value)}/>
-                <br/>
-                <button onClick={e => handleSubmit(notes, e)}>Submit</button>
-            </label>
-        </form>
+        <div>
+            <form>
+                <label>
+                    Want to go deeper?
+                    <br/>
+                    <textarea id="notesOnFeeling" onChange={e => handleChange(e.target.value)}/>
+                    <br/>
+                    <button onClick={e => handleSubmit(notes, e)}>Submit</button>
+                </label>
+            </form>
+        </div>
     );
 }
 

@@ -22,7 +22,7 @@ const emotions = [
       color: "#441E57"
   },
   {
-      name: "melancholic",
+      name: "melancholy",
       color: "#004185"
   },
   {

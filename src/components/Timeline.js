@@ -14,6 +14,7 @@ export default function Timeline ({history}) {
                 {
                     history.map( element => 
                         <li 
+                            key={element.id}
                             className="list-inline-item"
                             style={{backgroundColor: element.color}}
                         >
