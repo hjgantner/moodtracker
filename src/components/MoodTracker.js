@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Emotion from  './Emotion';
 import Notes from  './Notes';
 import '../css/MoodTracker.css';
-import { CirclePicker } from 'react-color';
 
 
 class MoodTracker extends Component {
@@ -20,14 +19,13 @@ class MoodTracker extends Component {
     render() {
 
         return (
-            <div className="jumbotron">
-                {this.props.username !== "" ? 
-                    <h1>What's going on {this.props.username}</h1>
-                    : <h1>Please enter a username</h1>
-                }
+            <div>
 
-                <div>
-                    
+                <div className="jumbotron text-center">
+                    {this.props.username !== "" ? 
+                        <h1>What's going on {this.props.username}</h1>
+                        : <h1>Please enter a username</h1>
+                    }
 
                     {this.props.moods.map(mood => (
                         <Emotion 
@@ -35,17 +33,13 @@ class MoodTracker extends Component {
                             changeMood={this.props.changeMood}
                         />
                     ))}
-                   
                 </div>
-                <div>
+                <div className="container-fluid text-center">
                     {this.props.mood !== "" ? 
                         <h2>I'm feeling {this.props.mood}</h2>
                         : null }
-                </div>
-                <br/>
-                {
-                     <div>
-                     {
+                
+                    {
                         this.props.mood ? 
                     
                             <Notes
@@ -53,10 +47,11 @@ class MoodTracker extends Component {
                             />
                         :
                         ""
-                     }
-                    </div>
-                }
+                    }
+                </div>
             </div>
+
+
         );
     }
 

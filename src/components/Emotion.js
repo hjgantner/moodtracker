@@ -1,6 +1,7 @@
 import React from 'react';
 import '../css/MoodTracker.css';
 import styled from 'styled-components'
+import { motion } from 'framer-motion';
 
 const CircleButton = styled.button`
     width: 75px;
@@ -10,6 +11,7 @@ const CircleButton = styled.button`
     font-size: 12px;
     text-align: center;
     margin-right: 15px;
+    margin-top: 15px;
     border: none;
     transition-duration: 0.5s;
     background-color: ${props => 
@@ -28,11 +30,26 @@ const CircleButton = styled.button`
             props.color
         }; 
         transition-duration: 0.4s;
+    }
 
+    &:focus {
+        background-color: ${props => 
+            props.color
+        }; 
+        transition-duration: 0.4s;
     }
 `;
 
 function Emotion ({ emotion, changeMood }) {
+
+    //TODO:
+    //write function that sets the selected emotion's button 
+    // to a select state (white background, text showing.)
+    // This could also set the submit button to the color of the emotion
+
+    function setSelectedEmotion(e) {
+        console.log("setSelectedEmotion: ", e, "\nemotion: ", emotion);
+    }
     
     return (
         
@@ -40,12 +57,15 @@ function Emotion ({ emotion, changeMood }) {
             <div className="d-flex text-center flex-column">
                 
             
-            
                 <CircleButton
                     emotion={emotion.name}
                     color={emotion.color}
                     // className="btn-flip"
-                    onClick={e => changeMood(emotion.name, emotion.color)}
+                    onClick={e => {
+                        setSelectedEmotion(e);
+                        changeMood(emotion.name, emotion.color);
+                    }
+                    }
                 >
                     {emotion.name}
                 </CircleButton>

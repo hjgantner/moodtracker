@@ -10,7 +10,6 @@ function Notes ({submitEmotions}) {
 
     const handleSubmit = (notes,e) => {
         e.preventDefault();
-        console.log(e);
         submitEmotions(notes);
     }
 
