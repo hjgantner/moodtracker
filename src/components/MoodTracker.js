@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import Emotion from  './Emotion';
 import Notes from  './Notes';
 import '../css/MoodTracker.css';
+import { 
+    motion, 
+    AnimatePresence
+} from 'framer-motion';
 
 
 class MoodTracker extends Component {
@@ -16,12 +20,26 @@ class MoodTracker extends Component {
         console.log("color: ", color);
         console.log("event: ", event);
     }
+
+    
+
     render() {
-
+        const variants = {
+            hidden: { opacity: 0 },
+            visible: { opacity: 1 },
+        }
         return (
-            <div>
 
-                <div className="jumbotron text-center">
+            <motion.div 
+                initial="hidden"
+                animate="visible"
+                variants={variants}
+            >
+
+                <div 
+                    className="jumbotron text-center"
+                    
+                >
                     {this.props.username !== "" ? 
                         <h1>What's going on {this.props.username}</h1>
                         : <h1>Please enter a username</h1>
@@ -34,22 +52,18 @@ class MoodTracker extends Component {
                         />
                     ))}
                 </div>
-                <div className="container-fluid text-center">
-                    {this.props.mood !== "" ? 
-                        <h2>I'm feeling {this.props.mood}</h2>
-                        : null }
-                
-                    {
-                        this.props.mood ? 
-                    
-                            <Notes
-                                submitEmotions={this.props.submitEmotions}
-                            />
-                        :
-                        ""
-                    }
-                </div>
-            </div>
+                {
+                    this.props.mood ? 
+                        
+                        <Notes
+                            submitEmotions={this.props.submitEmotions}
+                            color={this.props.color}
+                            mood={this.props.mood}
+                        />
+                    :
+                    null
+                }
+            </motion.div>
 
 
         );

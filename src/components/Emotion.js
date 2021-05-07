@@ -1,7 +1,6 @@
 import React from 'react';
 import '../css/MoodTracker.css';
 import styled from 'styled-components'
-import { motion } from 'framer-motion';
 
 const CircleButton = styled.button`
     width: 75px;
@@ -24,20 +23,16 @@ const CircleButton = styled.button`
     &:hover {
         background-color: white;
     }
-
+    &:focus {
+        background-color: white;
+    }
     &:active {
         background-color: ${props => 
             props.color
         }; 
-        transition-duration: 0.4s;
     }
 
-    &:focus {
-        background-color: ${props => 
-            props.color
-        }; 
-        transition-duration: 0.4s;
-    }
+
 `;
 
 function Emotion ({ emotion, changeMood }) {

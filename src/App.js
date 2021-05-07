@@ -133,7 +133,10 @@ class App extends Component {
       // if(!this.state.history) {
       console.log("response: ", newInsert);
       var updatedHistory = this.state.history.concat(newInsert);
-      this.setState({ history : updatedHistory });
+      this.setState({ 
+        history : updatedHistory,
+        color: 'grey'
+      });
     });
     return;
   }
@@ -161,6 +164,7 @@ class App extends Component {
               changeMood={this.changeMood}
               submitEmotions={this.submitEmotion}
               mood={this.state.mood}
+              color={this.state.color}
             />
             <Timeline history={this.state.history}/>
           </div>)

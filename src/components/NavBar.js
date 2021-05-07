@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 function NavBar ({setUsername}) {
     return(
         <nav className="navbar navbar-inverse">
