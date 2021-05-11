@@ -1,38 +1,56 @@
 import React from 'react';
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
+import TimelineItem from './TimelineItem';
+import { 
+    motion
+} from 'framer-motion';
 
-
-export default function Timeline ({history}) {
+export default function Timeline ({history, userName}) {
     console.log("moods in Timeline: ", history);
 
+    const dateSet = new Set();
+
+    function createUniqueDates(dates) {
+        // for(let i = 0; i < dates.length; i++) {
+        //     if()
+        // }
+    }
+    const variants = { 
+        hidden: { opacity: 0 },
+        visible: { opacity: 1 },
+    }
+
+    const transition = {
+        type: "spring",
+        duration: 2.3,
+        stiffness: 30,
+    }
 
     return (
-        <div>
-            <h1>TIMELINE:</h1>
-            <ul className="list-inline">
+        
+        <div className="container text-center">
+            <div className="container"></div>
+            <motion.div 
+                    initial="hidden"
+                    animate="visible"
+                    variants={variants}
+                    transition={transition}
+                >
+            {
+                history.filter( element => {
+
+                })
+            }
+            <div className="d-inline-flex row">
+            
                 {
                     history.map( element => 
-                        <li 
-                            key={element.id}
-                            className="list-inline-item"
-                            style={{backgroundColor: element.color}}
-                        >
-                            <OverlayTrigger 
-                                placement="top"
-                                overlay={<Tooltip id="button-tooltip-2">{(element.notes && element.insertedAt) ? 
-                                    "Notes: " + element.notes : element.mood}</Tooltip>}
-                            >
-                                <button 
-                                    type="button" 
-                                    className="btn btn-lg" 
-                                >
-                                </button>
-                            </OverlayTrigger>
-                        </li>                       
+                        <TimelineItem 
+                            data={element}
+                        />
                     )
                 }
-            </ul>
+            </div>
+            </motion.div>
         </div>
     );
 }

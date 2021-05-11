@@ -46,7 +46,7 @@ function Notes ({submitEmotions, color, mood}) {
     const handleSubmit = (notes,e) => {
         e.preventDefault();
         submitEmotions(notes);
-
+        
     }
     const variants = {
         hidden: { 
@@ -62,28 +62,30 @@ function Notes ({submitEmotions, color, mood}) {
         },
     }
     return (
-        <motion.div
-            className="container-fluid text-center"
-            initial="hidden"
-            animate="visible"
-            variants={variants}
-        >
-            <h2>I'm feeling {mood}</h2>
-            <form>
-                <label>
-                    Want to go deeper?
-                    <br/>
-                    <textarea id="notesOnFeeling" onChange={e => handleChange(e.target.value)}/>
-                    <br/>
-                    <SubmitButton 
-                        onClick={e => handleSubmit(notes, e)}
-                        color={color}
-                    >
-                        Submit
-                    </SubmitButton>
-                </label>
-            </form>
-        </motion.div>
+        <div className="container">
+            <motion.div
+                className="container-fluid text-center"
+                initial="hidden"
+                animate="visible"
+                variants={variants}
+            >
+                <h2>I'm feeling {mood}</h2>
+                <form>
+                    <label>
+                        Want to go deeper?
+                        <br/>
+                        <textarea id="notesOnFeeling" onChange={e => handleChange(e.target.value)}/>
+                        <br/>
+                        <SubmitButton 
+                            onClick={e => handleSubmit(notes, e)}
+                            color={color}
+                        >
+                            Submit
+                        </SubmitButton>
+                    </label>
+                </form>
+            </motion.div>
+        </div>
     );
 }
 

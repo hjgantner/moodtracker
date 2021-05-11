@@ -1,7 +1,14 @@
 import MoodTracker from './components/MoodTracker';
-import NavBar from './components/NavBar';
 import Timeline from './components/Timeline';
 import { React, Component } from 'react';
+import { 
+  BrowserRouter as Router, 
+  Route, 
+  Switch,
+  Redirect
+} from 'react-router-dom';
+
+import NavBar from './components/NavBar';
 
 
 const emotions = [
@@ -72,15 +79,15 @@ class App extends Component {
         color: "",
         notes: "",
         insertedAt: "",
-        showTimeline: false,
         history: []
     };
 
     this.changeMood = this.changeMood.bind(this);
     this.setUsername = this.setUsername.bind(this);
     this.submitEmotion = this.submitEmotion.bind(this);
-
+    this.setUpNewMood = this.setUpNewMood.bind(this);
   }
+
 
   componentDidUpdate() {
     if(this.state.username) {
@@ -95,6 +102,17 @@ class App extends Component {
       color: color
     });
     return;
+  }
+
+  setUpNewMood () {
+    this.setState({
+      id: "",
+      mood: "",
+      color: "",
+      notes: "",
+      insertedAt: "",
+      showTimeline: false,
+    })
   }
 
   setUsername (username) {
@@ -112,14 +130,22 @@ class App extends Component {
     return;
   }
 
+  getIsoAndLocalDate () {
+    var newDateNoOffset = new Date();
+    var offset = newDateNoOffset.getTimezoneOffset() * 60000;
+
+    var totalOffset = (newDateNoOffset.getTime() - offset);
+    return new Date(totalOffset).toISOString();
+  }
+
   //after emotion, username, and possibly notes are set, 
   // store that information along with a date stamp.
   submitEmotion (notes) {
-    console.log(notes);
     if(notes) {
       this.setState({notes: notes});
     }
-    var insertStamp = new Date();
+    var insertStamp = this.getIsoAndLocalDate();
+    console.log(insertStamp);
     this.setState({insertedAt: insertStamp}, async () => {
       const response = await fetch(`http://localhost:8080/${this.state.username}`, {
         method: 'POST',
@@ -131,14 +157,16 @@ class App extends Component {
       const newInsert = await response.json();
       // this.setState({showTimeline : true});
       // if(!this.state.history) {
-      console.log("response: ", newInsert);
       var updatedHistory = this.state.history.concat(newInsert);
-      this.setState({ 
+      this.setState({
         history : updatedHistory,
-        color: 'grey'
+        color: 'grey',
       });
     });
-    return;
+
+        
+    return 
+
   }
 
   async getHistory () {
@@ -149,29 +177,48 @@ class App extends Component {
   
   render() {
 
+    const redirect = this.state.insertedAt;
+    console.log("redirect: ", !!redirect);
+
+
     return (
-      <div className="App">
-        <NavBar
-          setUsername={this.setUsername}
-        />
-        {
-          this.state.username ?
-          (<div className="container-fluid">
-            <MoodTracker
-              moods={emotions}
-              username={this.state.username}
-              notes={this.state.notes}
-              changeMood={this.changeMood}
-              submitEmotions={this.submitEmotion}
-              mood={this.state.mood}
-              color={this.state.color}
-            />
-            <Timeline history={this.state.history}/>
-          </div>)
-          :
-          ""
-          }
-      </div>
+      <Router>
+        <div className="App">
+          <NavBar 
+           setUsername={this.setUsername}
+           newMood={this.setUpNewMood}
+          />
+          <div className="container-fluid">
+            {/* <BrowserRouter> */}
+              <Switch>
+                <Route exact path="/">
+                  {
+                    redirect ? 
+                    <Redirect to="/timeline"/>
+                    :
+                    <MoodTracker
+                      moods={emotions}
+                      username={this.state.username}
+                      notes={this.state.notes}
+                      changeMood={this.changeMood}
+                      submitEmotions={this.submitEmotion}
+                      mood={this.state.mood}
+                      color={this.state.color}
+                      setUsername={this.setUsername}
+                    />
+                  }
+                </Route>
+                <Route path="/timeline">
+                  <Timeline 
+                    history={this.state.history}
+                    userName={this.state.username}
+                  />
+                </Route>
+              </Switch>
+            {/* </BrowserRouter> */}
+          </div>
+        </div>
+      </Router>
     );
   }
 

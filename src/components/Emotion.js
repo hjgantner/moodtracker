@@ -50,8 +50,6 @@ function Emotion ({ emotion, changeMood }) {
         
         <div className="d-inline-flex">
             <div className="d-flex text-center flex-column">
-                
-            
                 <CircleButton
                     emotion={emotion.name}
                     color={emotion.color}
