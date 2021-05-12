@@ -62,7 +62,7 @@ function Notes ({submitEmotions, color, mood}) {
         },
     }
     return (
-        <div className="container">
+        <div className="container mt-5">
             <motion.div
                 className="container-fluid text-center"
                 initial="hidden"

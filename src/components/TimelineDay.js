@@ -6,25 +6,25 @@ import {
 
 const TimelineDay = ({day, data}) => {
 
-    // const variants = { 
-    //     hidden: { opacity: 0 },
-    //     visible: { opacity: 1 },
-    // }
+    const variants = { 
+        hidden: { opacity: 0 },
+        visible: { opacity: 1 },
+    }
 
-    // const transition = {
-    //     type: "spring",
-    //     duration: 2.3,
-    //     stiffness: 30,
-    // }
+    const transition = {
+        type: "spring",
+        duration: 2.3,
+        stiffness: 30,
+    }
     return (
         
-        // <motion.div 
-        //     initial="hidden"
-        //     animate="visible"
-        //     variants={variants}
-        //     transition={transition}
-        // >
-        <div className="d-flex flex-column">
+        <motion.div 
+            initial="hidden"
+            animate="visible"
+            variants={variants}
+            transition={transition}
+        >
+        <div className="d-flex flex-column mt-5">
             <div className="d-flex row">
                 <h4>{day}</h4>
             </div>
@@ -40,7 +40,7 @@ const TimelineDay = ({day, data}) => {
         </div>
 
             
-        // </motion.div>
+        </motion.div>
     );
 };
 
