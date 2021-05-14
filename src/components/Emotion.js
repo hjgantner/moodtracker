@@ -42,23 +42,21 @@ function Emotion ({ emotion, changeMood }) {
     // to a select state (white background, text showing.)
     // This could also set the submit button to the color of the emotion
 
-    function setSelectedEmotion(e) {
-        console.log("setSelectedEmotion: ", e, "\nemotion: ", emotion);
-    }
+
     
     return (
         
-        <div className="d-inline-flex">
-            <div className="d-flex text-center flex-column">
+        <div className="d-inline-flex" key={emotion.name}>
+            <div className="d-flex text-center flex-column" key={emotion.name}>
                 <CircleButton
                     emotion={emotion.name}
                     color={emotion.color}
                     // className="btn-flip"
                     onClick={e => {
-                        setSelectedEmotion(e);
                         changeMood(emotion.name, emotion.color);
                     }
                     }
+                    key={emotion.name}
                 >
                     {emotion.name}
                 </CircleButton>

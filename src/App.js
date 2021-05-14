@@ -9,7 +9,8 @@ import {
 } from 'react-router-dom';
 
 import NavBar from './components/NavBar';
-
+import Background from './background.svg';
+import './css/App.css';
 
 const emotions = [
   {
@@ -177,23 +178,26 @@ class App extends Component {
   
   render() {
 
-    const redirect = this.state.insertedAt;
-    console.log("redirect: ", !!redirect);
-
-
+    const redirectToTimeline = this.state.insertedAt;
+    
+    
     return (
       <Router>
-        <div className="App">
+        <div className="App ">
+          
           <NavBar 
            setUsername={this.setUsername}
            newMood={this.setUpNewMood}
           />
+          
+          {/* <div className="container-fluid fill background"> */}
           <div className="container-fluid">
+
             {/* <BrowserRouter> */}
               <Switch>
                 <Route exact path="/">
                   {
-                    redirect ? 
+                    redirectToTimeline ? 
                     <Redirect to="/timeline"/>
                     :
                     <MoodTracker

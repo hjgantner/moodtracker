@@ -11,7 +11,7 @@ const TimelineItem = ({data}) => (
             "Notes: " + data.notes : data.mood}</Tooltip>}
         >
             <div
-                className="column p-4"
+                className="col p-4"
                 style={{backgroundColor: data.color}}
             >
                 {/* <button 

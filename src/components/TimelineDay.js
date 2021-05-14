@@ -24,11 +24,11 @@ const TimelineDay = ({day, data}) => {
             variants={variants}
             transition={transition}
         >
-        <div className="d-flex flex-column mt-5">
+        <div className="d-flex flex-column mt-5" key={day}>
             <div className="d-flex row">
                 <h4>{day}</h4>
             </div>
-            <div className="d-flex row">
+            <div className="d-flex row" key={day}>
                 {
                     data.map( element => 
                         <TimelineItem 

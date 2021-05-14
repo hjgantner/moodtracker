@@ -38,8 +38,8 @@ class MoodTracker extends Component {
                     variants={variants}
                 >
                     <div 
-                        className="section select-mood text-center"
-                        
+                        className="section select-mood text-center mt-5"
+                        key={this.props.color}
                     >
                         {this.props.username ? 
                             <h1>What's going on {this.props.username}</h1>

@@ -10,6 +10,9 @@ export default function Timeline ({history, userName}) {
     const [dateSet, setDateSet] = useState(new Set());
 
     useEffect(() => {
+
+
+
         setUniqueDates(history)
         return () => {
             
@@ -23,7 +26,6 @@ export default function Timeline ({history, userName}) {
             return elem.insertedAt.split('T')[0];
         });        
         setDateSet(new Set(dates));
-        console.log([...dateSet]);
     }
 
     return (
